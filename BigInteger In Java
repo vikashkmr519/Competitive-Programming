@@ -1,0 +1,28 @@
+
+import java.util.*;
+import java.math.BigInteger;
+
+public class julkaBigInteger {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+
+        BigInteger n, k, ans;
+        while(t>0){
+            n = sc.nextBigInteger();
+            k= sc.nextBigInteger();
+            compute(n,k);
+            t--;
+        }
+    }
+
+    static void compute(BigInteger n, BigInteger k){
+        BigInteger x, y;
+        x = n.add(k);
+        x= x.divide(BigInteger.valueOf(2));
+        y = n.subtract(x);
+        System.out.println(x);
+        System.out.println(y);
+    }
+}
