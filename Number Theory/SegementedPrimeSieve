@@ -1,0 +1,76 @@
+
+//Question link -   https://www.spoj.com/problems/PRIME1/
+
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+public class SegmentedPrimeSieve {
+    static List<Integer> list;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int  t = sc.nextInt();
+        primeSieve();
+        while(t>0){
+            long m = sc.nextLong();
+            long n = sc.nextLong();
+            NumOfPrimeInRange(m , n);
+
+            t--;
+        }
+    }
+
+    private static void NumOfPrimeInRange(long m, long n) {
+        int arr[] = new int[(int)(n-m+1)];
+        Arrays.fill(arr,0);
+
+        for(long x: list){
+            if(x*x>n){
+                break;
+            }
+
+            long start = (m/x)*x;
+
+            if(x>=m && x<=n){
+                start = x*2;
+            }
+            for(long i = start;i<=n;i+=x){
+                if(i-m<0){
+                    continue;
+                }
+                arr[(int)(i-m)]=1;
+            }
+        }
+
+
+        for(long i =m;i<=n;i++){
+            if(arr[(int)(i-m)]==0 && i!=1){
+                System.out.println(i+" ");
+            }
+        }
+
+    }
+
+    private static void primeSieve(){
+        int range = 100000;
+        //because the given range is till 10^9
+        //and it exceeds the range of the array i.e 10^8
+        //hence we will find the primes numbers till 10^5 which is
+        // approximately the square root of 10^9
+        int[] prime = new int[100001];
+        Arrays.fill(prime,0);
+        list = new ArrayList<>();
+        for(int i =2;i<=100000;i++){
+            if(prime[i]==0){
+                list.add(i);
+                for(int j =i;j<=100000;j+=i)
+                {
+                    prime[j]=1;
+                }
+            }
+        }
+
+    }
+}
