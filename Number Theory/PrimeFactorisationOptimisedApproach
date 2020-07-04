@@ -1,0 +1,33 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+// optimisation here is instead of going to check with each number we just checked till square root of the number whose prime factorisation we are finding
+
+
+public class PrimeFactorisationOptimised {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i =2;i*i<=n;i++){
+            if(n%i==0){
+                int count=0;
+                while(n%i==0){
+                    count++;
+                    n= n/i;
+                }
+                map.put(i,count);
+            }
+        }
+        if(n!=1){
+        // we used this loop because it can happen that at the end, one number is left and is not  divisible by the square root of it , then that number it self
+        // will be a prime number hence we will add that also
+            map.put(n,1);
+        }
+
+        for(Map.Entry<Integer,Integer> x : map.entrySet()){
+            System.out.println(x.getKey()+" -> "+x.getValue());
+        }
+    }
+}
