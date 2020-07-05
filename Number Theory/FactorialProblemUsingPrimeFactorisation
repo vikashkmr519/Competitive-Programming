@@ -1,0 +1,71 @@
+
+import java.util.Scanner;
+
+///QUESTION => Mike found an interesting problem. In this problem you
+//are given two integers, n and k . YOu need to find the maximum value of x, such that 
+//    (n! % (k^x))==0
+// Input -> 2
+//          5   2
+//          1000   2
+// output-> 3
+//          994
+
+ public class FactorialProblemPrimeFactorisation {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+
+        while(t>0){
+            int n = sc.nextInt();
+            int k = sc.nextInt();
+            find(n,k);
+            t--;
+        }
+    }
+
+    private static void find(int n, int k) {
+        int occ =0;//occurence
+        int ans = Integer.MAX_VALUE;
+        for(int i = 2;i*i<=k;i++){
+            if(k%i==0){
+                int count =0;
+                while(k%i==0){//this while loop will give the prime factorisation and its count
+                    count++;
+                    k=k/i;
+                }
+                int p = i;
+                occ=0;//this will give the occurence of i in the factorial of n
+                while(n%p!=0){
+                    occ += n/p;
+                    p *= i;
+                }
+                ans = Math.min(ans, occ/count);
+                //here we have done occ/count
+                //because to get remainder zero we have to have occ>= count
+                // hence to get the one particular x value , we will have the minimum value of the occ/ count
+
+            }
+        }
+        if(k>1){// sometimes at the end we are left with one prime factor which is not counted above
+            int p = k;
+            occ =0;
+            while(p<=n){
+                occ += n/p;
+                p *= k;
+            }
+            ans = Math.min(ans, occ);
+            // here we haven't done occ/ count
+            //because here count is one , as i  said we will be left with one number only
+            // hence its count will also be one.
+
+        }
+
+        if(ans == Integer.MAX_VALUE){
+            // if by chance their is no prime factor of k which will divide the above value then
+            // ans will become zero
+            ans =0;
+        }
+
+        System.out.println(ans);
+    }
+}
