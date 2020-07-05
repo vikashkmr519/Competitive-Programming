@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+// when a  and b is given and we have to solve an eqaution as
+// ax +by = GCD(a,b)
+// then we use Euclids extended algorithm
+
+public class EuclidExtendedAlgorithm {
+    static int x,y,GCD;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+
+        extendEuclid(a,b);
+        System.out.println(x +" , "+y);
+
+    }
+
+    private  static void extendEuclid(int a , int b){
+         // base case
+        if(b==0){
+            x =1;
+            y =0;
+            GCD= a;
+            return;
+        }
+
+        extendEuclid(b,a%b);
+
+        int cX = y;
+        int cY = x - ((a/b)*y);
+
+        x = cX;
+        y= cY;
+    }
+}
