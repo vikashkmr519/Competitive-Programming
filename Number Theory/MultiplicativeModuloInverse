@@ -1,0 +1,46 @@
+
+import java.util.Scanner;
+
+public class MultiplicativeModuloInvere {
+     static int x , y,GCD;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int m = sc.nextInt();
+        
+        inverseModulo(a,m);
+    }
+
+    private static int inverseModulo(int a, int m) {
+        
+        if(GCD(a,m)==1){
+            extendEuclid(a,m);
+            return (x+m)%m;
+        }
+        return -1;
+        //this is if its gcd is not 1
+        //then its inverse modulo doesn't exist
+    }
+
+    private  static int GCD(int a, int b ){
+        return b==0 ? a : GCD(b,a%b);
+    }
+    
+    private  static void extendEuclid(int a , int b){
+        // base case
+        if(b==0){
+            x =1;
+            y =0;
+            GCD= a;
+            return;
+        }
+
+        extendEuclid(b,a%b);
+
+        int cX = y;
+        int cY = x - ((a/b)*y);
+
+        x = cX;
+        y= cY;
+    }
+}
