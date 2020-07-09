@@ -1,0 +1,42 @@
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class TotientFunction {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<Integer> list = primeFactors(n);
+
+        int ans = n;
+        for(int x : list){
+
+
+            ans = (ans*(x-1))/x;
+        }
+
+       System.out.println(ans);
+
+    }
+    private static  List<Integer> primeFactors(int n){
+
+        List<Integer> list = new ArrayList<>();
+
+        for(int i =2;i*i<=n;i++){
+            if(n%i==0){
+                list.add(i);
+                while(n%i==0){
+                    n=n/i;
+                }
+            }
+        }
+
+        if(n!=1){
+            list.add(n);
+        }
+        return list;
+    }
+
+}
+
