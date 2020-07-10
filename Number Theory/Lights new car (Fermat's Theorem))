@@ -1,0 +1,56 @@
+
+import java.util.Scanner;
+
+/*
+    question -> There is a guy , he want to buy a car , at the lauch of the car the rate of the car
+    is A . after each passing day the rate of the car becomes A times the price oin the previous day
+    He want to know the rate of the car on the Bth day.
+    the contraints are very very very large hece the sol should be mod of (10^9 + 7)
+ */
+public class LightsNewCar {
+    static long mod  = 1000000007;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t>0){
+            String a= sc.next();
+            String b = sc.next();
+
+            long x = stringToInt(a,mod);
+            long y = stringToInt(b,mod-1);
+
+            //now find the power
+            long ans  = Power(x,y,mod);
+
+            System.out.println(ans);
+
+            t--;
+        }
+    }
+
+    private static long Power(long x, long y, long m) {
+        //base case
+        if(y==0){
+            return 1;
+        }
+        long smallPower = Power(x,y/2,mod);
+        smallPower%=m;
+        smallPower= smallPower*smallPower;
+
+        if((y&1)==1){
+            return (x*smallPower)%m;
+        }
+        return smallPower;
+    }
+
+    private static long stringToInt(String a, long m){
+
+        long ans =0;
+        for(int i =0;i<a.length();i++){
+            ans  = ans%m + (a.charAt(i)-'0');
+            ans%=m;
+        }
+
+        return ans%m;
+    }
+}
