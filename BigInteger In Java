@@ -8,6 +8,11 @@ public class julkaBigInteger {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
 
+        /*
+            BigInteger class is used for mathematical operation which involves
+            very big integer calculations that are outside the limit of all 
+            available primitive data types.
+        */
         BigInteger n, k, ans;
         while(t>0){
             n = sc.nextBigInteger();
